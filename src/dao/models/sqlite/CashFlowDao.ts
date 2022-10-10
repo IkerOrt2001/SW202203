@@ -17,6 +17,17 @@ export class CashFlowDao extends AbstractDao<ICashFlow>{
         return super.findAll()
     }
 
+    
+    public async getClashFlowById( identifier : Partial<ICashFlow> ){
+        try{
+          const result = await super.findById(identifier);
+          return result;
+        } catch( ex: unknown) {
+          console.log("CashFlowDao sqlite:", (ex as Error).message);
+          throw ex;
+        }
+    }
+
     public async insertNewCashFlow(newCashFlow: ICashFlow){
         try{
             const result = await super.createOne(newCashFlow);
